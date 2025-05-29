@@ -1,0 +1,123 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fintech API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/accounts": {
+      "post": {
+        "summary": "Open Account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ownerName": { "type": "string" }
+                },
+                "required": ["ownerName"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the created account ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accountId": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/accounts/deposit": {
+      "patch": {
+        "summary": "Deposit money into an account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "accountId": { "type": "string" },
+                  "amount": { "type": "number" }
+                },
+                "required": ["accountId", "amount"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deposit successful"
+          }
+        }
+      }
+    },
+    "/api/accounts/withdraw": {
+      "patch": {
+        "summary": "Withdraw money from an account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "accountId": { "type": "string" },
+                  "amount": { "type": "number" }
+                },
+                "required": ["accountId", "amount"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Withdrawal successful"
+          }
+        }
+      }
+    },
+    "/api/accounts/balance": {
+      "get": {
+        "summary": "Get account balance",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the current account balance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "balance": { "type": "number" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
